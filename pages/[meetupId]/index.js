@@ -24,10 +24,19 @@ const Dummy_Meetups = [
   },
 ];
 
-function meetupDetails() {
+const defaultMeetup = {
+  title: "Unknown Meetup",
+  image:
+    "https://img.freepik.com/free-vector/flat-illustration-people-meeting_23-2148923220.jpg",
+  address: "No address available",
+};
+
+function meetupDetails({ meetup }) {
   const router = useRouter();
-  const path = router.query.meetupId;
-  const meetup = Dummy_Meetups.find((meet) => meet.id === Number(path));
+
+  if (router.isFallback) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div style={{ width: "100%", textAlign: "center" }}>
@@ -36,6 +45,23 @@ function meetupDetails() {
       <address>{meetup.address}</address>
     </div>
   );
+}
+
+export function getStaticPaths() {
+  return {
+    fallback: true,
+    paths: Dummy_Meetups.map((meetup) => ({
+      params: { meetupId: meetup.id.toString() },
+    })),
+  };
+}
+
+export function getStaticProps(context) {
+  const meetupId = context.params.meetupId;
+  const meetup = Dummy_Meetups.find((meet) => meet.id === Number(meetupId));
+  return {
+    props: { meetup: meetup || defaultMeetup },
+  };
 }
 
 export default meetupDetails;
