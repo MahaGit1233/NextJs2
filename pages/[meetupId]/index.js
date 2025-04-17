@@ -27,7 +27,7 @@ const Dummy_Meetups = [
 const defaultMeetup = {
   title: "Unknown Meetup",
   image:
-    "https://img.freepik.com/free-vector/flat-illustration-people-meeting_23-2148923220.jpg",
+    "https://i.pinimg.com/736x/d9/59/49/d95949cdbd9997d726ed8be5853d6143.jpg",
   address: "No address available",
 };
 
