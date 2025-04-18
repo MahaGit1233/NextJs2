@@ -1,5 +1,7 @@
 import { MongoClient, ObjectId } from "mongodb";
+import Head from "next/head";
 import { useRouter } from "next/router";
+import { Fragment } from "react";
 
 function meetupDetails(props) {
   const router = useRouter();
@@ -9,11 +11,17 @@ function meetupDetails(props) {
   }
 
   return (
-    <div style={{ width: "100%", textAlign: "center" }}>
-      <img src={props.meetup.image} />
-      <h2>{props.meetup.title}</h2>
-      <address>{props.meetup.address}</address>
-    </div>
+    <Fragment>
+      <Head>
+        <title>{props.meetup.title}</title>
+        <meta name="description" content={props.meetup.description} />
+      </Head>
+      <div style={{ width: "100%", textAlign: "center" }}>
+        <img src={props.meetup.image} />
+        <h2>{props.meetup.title}</h2>
+        <address>{props.meetup.address}</address>
+      </div>
+    </Fragment>
   );
 }
 
